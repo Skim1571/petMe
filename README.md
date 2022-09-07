@@ -27,6 +27,7 @@
 - Javascript
 - Python
 - Django
+- Tailwind
 ---
 
 ### **_Getting Started_**

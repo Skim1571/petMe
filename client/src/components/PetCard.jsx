@@ -11,13 +11,17 @@ export const PetCard = ({ shopPets }) => {
     <div className="pet-card-grid">
       {
         shopPets.map((pet) => (
-          <div key={pet._id} className="card pet-card" onClick={() => showPets(pet)}>
-            <div className="info-wrapper flex-col">
-              <h3>{pet.petName}</h3>
+          < div key={pet.id} className="card pet-card" onClick={() => showPets(pet)}>
+            <div className="info-wrapper">
+              <img src={pet.image_url} alt={pet.name}></img>
+              <h3>Name: {pet.name}</h3>
+              <h3>Species: {pet.species.name}</h3>
+              <h3>Age: {pet.age}</h3>
+              <h3>Birthdate: {pet.birth_date}</h3>
             </div>
           </div>
         ))
       }
-    </div>
+    </div >
   )
 }
