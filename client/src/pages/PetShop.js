@@ -10,11 +10,11 @@ export const PetShop = ({ isLoggedIn }) => {
 
   useEffect(() => {
     const getSpecies = async () => {
-      let res = await axios.get(`${BASE_URL}/species`)
-      console.log('species', res)
+      let res = await axios.get(`${BASE_URL}/species/`)
+      setSpeciesList(res.data)
     }
     getSpecies()
-  }, [])
+  }, [isLoggedIn])
 
   const createPetCard = (
     < div className="card pet-card" onClick={() => console.log('you clicked this')}>
@@ -25,12 +25,13 @@ export const PetShop = ({ isLoggedIn }) => {
     </div>
   )
 
+
   return (
     <div className='petshop'>
       <div>
         <h1>PetShop</h1>
       </div>
-      {/* <CreatePetForm speciesList={speciesList} /> */}
+      {!speciesList ? '' : <CreatePetForm speciesList={speciesList} />}
     </div>
   )
 }
