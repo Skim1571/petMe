@@ -5,8 +5,8 @@ import axios from "axios"
 import jwt from 'jwt-decode'
 import { PetCard } from "../components/PetCard"
 
-export const Home = ({ user, setUser, setAuthToken, isLoggedIn, setIsLoggedIn }) => {
-  const [myPets, setMyPets] = useState()
+export const Home = ({ myPets, setMyPets, user, setUser, setAuthToken, isLoggedIn, setIsLoggedIn }) => {
+
 
   const loginPanel = (
     <Login setUser={setUser} isLoggedIn={isLoggedIn} setAuthToken={setAuthToken} setIsLoggedIn={setIsLoggedIn} />

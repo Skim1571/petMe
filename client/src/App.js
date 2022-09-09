@@ -12,6 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [authToken, setAuthToken] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [myPets, setMyPets] = useState()
 
   const handleLogOut = () => {
     //Reset all auth related state and clear localStorage
@@ -23,18 +24,27 @@ function App() {
     localStorage.clear()
   };
 
-  const checkSession = async (token) => {
-    let csrfToken = decodeURIComponent(document.cookie)
+  const tokenAccessCreator = (token) => {
     let tokenObj = {
       "token": token.access,
-      "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(csrfToken), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+      "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
     }
+    return tokenObj
+  }
+
+  const tokenRefreshCreator = (token) => {
+    let tokenObj = {
+      "refresh": token.refresh,
+      "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+    }
+    return tokenObj
+  }
+
+  const checkSession = async (token) => {
+    let tokenObj = tokenAccessCreator(token)
     let userSession = await checkToken(tokenObj);
     if (userSession.code !== "") {
-      tokenObj = {
-        "refresh": token.refresh,
-        "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(csrfToken), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
-      }
+      tokenObj = tokenRefreshCreator(token)
       userSession = await refreshToken(tokenObj)
       setIsLoggedIn(false)
     }
@@ -55,7 +65,7 @@ function App() {
     checkTokenStatus()
   }, [isLoggedIn]);
 
-  function getCookie(name) {
+  function getCookie() {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
       let cookies = document.cookie.split(';');
@@ -72,8 +82,8 @@ function App() {
         <NavBar isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
       </header>
       <Routes>
-        <Route path='/' element={<Home user={user} setUser={setUser} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path='/petshop' element={<PetShop isLoggedIn={isLoggedIn} />} />
+        <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} user={user} setUser={setUser} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/petshop' element={<PetShop isLoggedIn={isLoggedIn} tokenAccessCreator={tokenAccessCreator} />} />
         <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
         <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />
       </Routes>

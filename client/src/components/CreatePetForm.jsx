@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 
-export const CreatePetForm = ({ speciesList }) => {
+export const CreatePetForm = ({ speciesList, tokenAccessCreator }) => {
   const [newPetDetails, setNewPetDetails] = useState({})
 
   let animalSelectionImage
@@ -14,7 +14,7 @@ export const CreatePetForm = ({ speciesList }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault()
-
+    tokenAccessCreator()
     console.log('click')
   }
 
@@ -23,17 +23,13 @@ export const CreatePetForm = ({ speciesList }) => {
       animalSelectionImage = speciesList[1].image_url
       break;
     case 2:
-      console.log('2', speciesList[1].image_url)
       animalSelectionImage = speciesList[0].image_url
       break;
     case 3:
-      console.log('3', speciesList[2].image_url)
       animalSelectionImage = speciesList[2].image_url
       break;
     default: console.log('default')
   }
-  console.log('choice', newPetDetails)
-  console.log('last', animalSelectionImage)
 
   return (
     <div className="createPet">
