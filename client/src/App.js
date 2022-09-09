@@ -1,11 +1,12 @@
 import './sytles/App.css'
 import { Routes, Route } from 'react-router-dom'
+import { useState, useEffect } from 'react';
+import { checkToken, refreshToken } from './services/Auth'
 import { NavBar } from './components/NavBar';
 import { Home } from './pages/Home'
 import { PetShop } from './pages/PetShop';
 import { PetDetails } from './pages/PetDetails';
-import { useState, useEffect } from 'react';
-import { checkToken, refreshToken } from './services/Auth'
+import { Register } from './pages/Register'
 
 function App() {
   const [user, setUser] = useState();
@@ -73,6 +74,7 @@ function App() {
         <Route path='/' element={<Home setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/petshop' element={<PetShop isLoggedIn={isLoggedIn} />} />
         <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
+        <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />
       </Routes>
     </div>
   );

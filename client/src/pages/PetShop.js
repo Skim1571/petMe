@@ -37,10 +37,8 @@ export const PetShop = ({ isLoggedIn }) => {
       </div>
       <div className="container-grid">
         <div>
-          {showPetCard}
-        </div>
-        <div>
           {isLoggedIn ? createPetCard : ''}
+          {showPetCard}
         </div>
       </div>
     </div>

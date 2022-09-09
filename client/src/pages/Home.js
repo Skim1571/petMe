@@ -3,7 +3,7 @@ import { Login } from "../components/Login"
 export const Home = ({ setAuthToken, isLoggedIn, setIsLoggedIn }) => {
 
   const loginPanel = (
-    <Login setAuthToken={setAuthToken} setIsLoggedIn={setIsLoggedIn} />
+    <Login isLoggedIn={isLoggedIn} setAuthToken={setAuthToken} setIsLoggedIn={setIsLoggedIn} />
   )
 
   return (

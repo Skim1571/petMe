@@ -14,7 +14,7 @@ export const signInUser = async (data) => {
 
 export const registerUser = async (data) => {
   try {
-    const res = await Client.post(`/signup`, data)
+    const res = await Client.post(`/signup/`, data)
     return res.data
   } catch (error) {
     throw error
