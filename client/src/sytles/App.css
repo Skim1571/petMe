@@ -114,3 +114,11 @@ nav {
   justify-content: center;
   align-items: center;
 }
+
+.loginForm {
+  display: flex;
+  color: black;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
