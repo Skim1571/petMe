@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom"
 
-export const PetCard = ({ shopPets }) => {
+export const PetCard = ({ Pets }) => {
   let navigate = useNavigate()
 
   const showPets = (pet) => {
@@ -10,7 +10,7 @@ export const PetCard = ({ shopPets }) => {
   return (
     <div className="pet-card-grid">
       {
-        shopPets.map((pet) => (
+        Pets.map((pet) => (
           < div key={pet.id} className="card pet-card" onClick={() => showPets(pet)}>
             <div className="info-wrapper">
               <img src={pet.image_url} alt={pet.name}></img>

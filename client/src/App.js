@@ -9,7 +9,7 @@ import { PetDetails } from './pages/PetDetails';
 import { Register } from './pages/Register'
 
 function App() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(null);
   const [authToken, setAuthToken] = useState()
   const [isLoggedIn, setIsLoggedIn] = useState(false)
 
@@ -19,7 +19,8 @@ function App() {
     setAuthToken(null)
     setIsLoggedIn(false);
     localStorage.removeItem("token_access")
-    localStorage.removeItem("token_refresh");
+    localStorage.removeItem("token_refresh")
+    localStorage.clear()
   };
 
   const checkSession = async (token) => {
@@ -29,14 +30,14 @@ function App() {
       "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(csrfToken), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
     }
     let userSession = await checkToken(tokenObj);
-    if (!userSession) {
+    if (userSession.code !== "") {
       tokenObj = {
-        "token": token.refresh,
+        "refresh": token.refresh,
         "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(csrfToken), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
       }
       userSession = await refreshToken(tokenObj)
+      setIsLoggedIn(false)
     }
-    setUser(userSession);
     setIsLoggedIn(true);
     //If a token exists, sends token to localStorage to persist logged in user
   };
@@ -71,7 +72,7 @@ function App() {
         <NavBar isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
       </header>
       <Routes>
-        <Route path='/' element={<Home setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/' element={<Home user={user} setUser={setUser} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/petshop' element={<PetShop isLoggedIn={isLoggedIn} />} />
         <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
         <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />

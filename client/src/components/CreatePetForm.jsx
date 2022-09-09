@@ -1,16 +1,13 @@
 import { useState } from "react"
 
-export const CreatePetForm = ({ petDetails }) => {
+export const CreatePetForm = ({ speciesList }) => {
   const [newPetDetails, setNewPetDetails] = useState({})
 
   const handleChange = (event) => {
-    console.log(event.target.value)
     setNewPetDetails({
       name: event.target.value,
-      species: petDetails.species.name,
-      image_url: petDetails.image_url
-    }
-    )
+      species: speciesList.name,
+    })
   }
 
   const handleSubmit = (event) => {
@@ -21,11 +18,17 @@ export const CreatePetForm = ({ petDetails }) => {
   return (
     <div className="createPet">
       <h1>Create Pet Form</h1>
-      <div className='petimage'>
-        <img src={petDetails.image_url} />
-      </div>
+      {/* <div className='petimage'>
+        <img src={speciesList.image_url} />
+      </div> */}
       <form onSubmit={handleSubmit}>
         <input onChange={handleChange} name='name' placeholder="Name"></input>
+        <select>
+          <option name="Selection" disabled>Select Your Pet's Species</option>
+          {speciesList.map((species) => (
+            <option key={species.id} name={species.name}>{species.name}</option>
+          ))}
+        </select>
         <button className="adoptBtn">Adopt me</button>
       </form>
     </div>

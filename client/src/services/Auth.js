@@ -25,8 +25,9 @@ export const checkToken = async (data) => {
   try {
     // Checks if the current token if it exists is valid
     const res = await Client.post('/api/token/verify/', data)
-    return ('access token still valid')
+    return (res.data)
   } catch (error) {
+    return ('error', error)
     throw error
   }
 }
@@ -35,6 +36,8 @@ export const refreshToken = async (data) => {
   try {
     // Checks if the current token if it exists is valid
     const res = await Client.post('/api/token/refresh/', data)
+    await localStorage.setItem('token_access', res.data.access)
+    await localStorage.setItem('token_refresh', res.data.refresh)
     return res.data
   } catch (error) {
     throw error

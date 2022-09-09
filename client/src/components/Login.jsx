@@ -4,7 +4,7 @@ import { BASE_URL } from "../globals"
 import { signInUser, registerUser } from "../services/Auth"
 import { useNavigate, useLocation } from "react-router-dom"
 
-export const Login = ({ isLoggedIn, setAuthToken, setIsLoggedIn }) => {
+export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
   const [loginInfo, setLoginInfo] = useState({ username: '', password: '' })
   const [registerInfo, setRegisterInfo] = useState({
     username: '',
@@ -22,6 +22,7 @@ export const Login = ({ isLoggedIn, setAuthToken, setIsLoggedIn }) => {
   const handleSubmitLogin = async (event) => {
     event.preventDefault()
     let payload = await signInUser(loginInfo)
+    setUser(loginInfo.username)
     setLoginInfo({ username: '', password: '' })
     await setAuthToken({ payload })
     await setIsLoggedIn(true)

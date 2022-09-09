@@ -1,25 +1,20 @@
 import { useState, useEffect } from 'react'
 import { BASE_URL } from '../globals'
 import axios from 'axios'
-import { PetCard } from '../components/PetCard'
+import { CreatePetForm } from '../components/CreatePetForm'
+
 
 export const PetShop = ({ isLoggedIn }) => {
-  let showPetCard
   const [shopPets, setShopPets] = useState()
-
-  const getShopPets = async () => {
-    const res = await axios.get(`${BASE_URL}/users/2`)
-    setShopPets(res.data.pets)
-  }
+  const [speciesList, setSpeciesList] = useState()
 
   useEffect(() => {
-    getShopPets()
-    showPetCard = true
+    const getSpecies = async () => {
+      let res = await axios.get(`${BASE_URL}/species`)
+      console.log('species', res)
+    }
+    getSpecies()
   }, [])
-
-  if (shopPets) {
-    showPetCard = <PetCard shopPets={shopPets} />
-  }
 
   const createPetCard = (
     < div className="card pet-card" onClick={() => console.log('you clicked this')}>
@@ -35,12 +30,7 @@ export const PetShop = ({ isLoggedIn }) => {
       <div>
         <h1>PetShop</h1>
       </div>
-      <div className="container-grid">
-        <div>
-          {isLoggedIn ? createPetCard : ''}
-          {showPetCard}
-        </div>
-      </div>
+      {/* <CreatePetForm speciesList={speciesList} /> */}
     </div>
   )
 }
