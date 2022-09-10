@@ -11,22 +11,28 @@ export const Home = ({ myPets, setMyPets, user, setUser, setAuthToken, isLoggedI
   const loginPanel = (
     <Login setUser={setUser} isLoggedIn={isLoggedIn} setAuthToken={setAuthToken} setIsLoggedIn={setIsLoggedIn} />
   )
+
+
+
   useEffect(() => {
     const getMyPets = async () => {
       let decodeToken = jwt(localStorage.getItem("token_access"))
+      setUser(decodeToken)
+      console.log('decoded', user)
       let res = await axios.get(`${BASE_URL}/users/${decodeToken.user_id}`)
       setMyPets(res.data.pets)
     }
     getMyPets()
-  }, [user])
+  }, [])
 
   // const myPetPanel = (
 
   // )
   let userData = (
-    <div>
-      <PetCard Pets={myPets} />
-    </div>
+    !myPets ? < div > < h1 > No Pets</h1> </div> :
+      <div>
+        <PetCard Pets={myPets} />
+      </div>
   )
 
 

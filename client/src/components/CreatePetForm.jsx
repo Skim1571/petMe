@@ -1,9 +1,16 @@
 import { useState, useEffect } from "react"
+import { BASE_URL } from "../globals"
+import { tokenAccessCreator, getCookie } from "../services/Auth"
+import axios from "axios"
+import jwt from "jwt-decode"
+import { Client } from "../services/api"
 
-export const CreatePetForm = ({ speciesList, tokenAccessCreator }) => {
+const auth = require('../services/Auth')
+
+export const CreatePetForm = ({ authToken, user, speciesList }) => {
   const [newPetDetails, setNewPetDetails] = useState({})
-
   let animalSelectionImage
+
 
   const handleChange = (event) => {
     setNewPetDetails({
@@ -12,10 +19,23 @@ export const CreatePetForm = ({ speciesList, tokenAccessCreator }) => {
     })
   }
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    tokenAccessCreator()
-    console.log('click')
+    // let token = auth.tokenAccessCreator(authToken)
+    // console.log('token', token)
+    let userInfo = jwt(authToken.access)
+    let data = {
+      "name": newPetDetails.name,
+      "species": newPetDetails.speciesChoice,
+      "user": userInfo.username,
+      "header": {
+        'Access-Control-Allow-Origin': '*',
+        'Content-Type': 'application/json',
+      }
+    }
+    console.log('data', data)
+    let res = await Client.post(`${BASE_URL}/pets/`, data)
+    console.log('post', res)
   }
 
   switch (parseInt(newPetDetails.speciesChoice)) {
@@ -28,7 +48,7 @@ export const CreatePetForm = ({ speciesList, tokenAccessCreator }) => {
     case 3:
       animalSelectionImage = speciesList[2].image_url
       break;
-    default: console.log('default')
+    default:
   }
 
   return (

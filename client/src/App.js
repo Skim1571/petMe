@@ -1,7 +1,7 @@
 import './sytles/App.css'
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { checkToken, refreshToken } from './services/Auth'
+import { checkToken, refreshToken, tokenAccessCreator, tokenRefreshCreator, getCookie } from './services/Auth'
 import { NavBar } from './components/NavBar';
 import { Home } from './pages/Home'
 import { PetShop } from './pages/PetShop';
@@ -24,29 +24,14 @@ function App() {
     localStorage.clear()
   };
 
-  const tokenAccessCreator = (token) => {
-    let tokenObj = {
-      "token": token.access,
-      "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
-    }
-    return tokenObj
-  }
-
-  const tokenRefreshCreator = (token) => {
-    let tokenObj = {
-      "refresh": token.refresh,
-      "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
-    }
-    return tokenObj
-  }
-
   const checkSession = async (token) => {
     let tokenObj = tokenAccessCreator(token)
     let userSession = await checkToken(tokenObj);
     if (userSession.code !== "") {
       tokenObj = tokenRefreshCreator(token)
       userSession = await refreshToken(tokenObj)
-      setIsLoggedIn(false)
+      setAuthToken(userSession)
+      setIsLoggedIn(true)
     }
     setIsLoggedIn(true);
     //If a token exists, sends token to localStorage to persist logged in user
@@ -54,26 +39,17 @@ function App() {
 
   useEffect(() => {
     const checkTokenStatus = async () => {
-      let token = {
+      setAuthToken({
         access: localStorage.getItem("token_access"),
         refresh: localStorage.getItem("token_refresh")
-      };
-      if (token) {
-        checkSession(token);
+      });
+      if (authToken) {
+        setIsLoggedIn(true)
+        checkSession(authToken);
       }
     }
     checkTokenStatus()
   }, [isLoggedIn]);
-
-  function getCookie() {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      let cookies = document.cookie.split(';');
-      cookieValue = cookies[0].toString()
-      cookieValue = cookieValue.substring(10, cookieValue.length)
-    }
-    return cookieValue;
-  }
 
 
   return (
@@ -83,7 +59,7 @@ function App() {
       </header>
       <Routes>
         <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} user={user} setUser={setUser} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
-        <Route path='/petshop' element={<PetShop isLoggedIn={isLoggedIn} tokenAccessCreator={tokenAccessCreator} />} />
+        <Route path='/petshop' element={<PetShop authToken={authToken} user={user} isLoggedIn={isLoggedIn} />} />
         <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
         <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />
       </Routes>

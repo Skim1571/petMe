@@ -22,7 +22,6 @@ export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
   const handleSubmitLogin = async (event) => {
     event.preventDefault()
     let payload = await signInUser(loginInfo)
-    setUser(loginInfo.username)
     setLoginInfo({ username: '', password: '' })
     await setAuthToken({ payload })
     await setIsLoggedIn(true)

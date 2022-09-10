@@ -4,7 +4,7 @@ import axios from 'axios'
 import { CreatePetForm } from '../components/CreatePetForm'
 
 
-export const PetShop = ({ isLoggedIn, tokenAccessCreator }) => {
+export const PetShop = ({ authToken, user, isLoggedIn, tokenAccessCreator }) => {
   const [shopPets, setShopPets] = useState()
   const [speciesList, setSpeciesList] = useState()
 
@@ -31,7 +31,7 @@ export const PetShop = ({ isLoggedIn, tokenAccessCreator }) => {
       <div>
         <h1>PetShop</h1>
       </div>
-      {!speciesList ? '' : <CreatePetForm speciesList={speciesList} tokenAccessCreator={tokenAccessCreator} />}
+      {!speciesList ? '' : <CreatePetForm authToken={authToken} user={user} speciesList={speciesList} />}
     </div>
   )
 }

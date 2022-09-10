@@ -43,3 +43,29 @@ export const refreshToken = async (data) => {
     throw error
   }
 }
+
+export const getCookie = () => {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    let cookies = document.cookie.split(';');
+    cookieValue = cookies[0].toString()
+    cookieValue = cookieValue.substring(10, cookieValue.length)
+  }
+  return cookieValue;
+}
+
+export const tokenAccessCreator = (token) => {
+  let tokenObj = {
+    "token": token.access,
+    "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+  }
+  return tokenObj
+}
+
+export const tokenRefreshCreator = (token) => {
+  let tokenObj = {
+    "refresh": token.refresh,
+    "headers": { 'X-Requested-With': 'XMLHttpRequest', 'X-CSRFToken': getCookie(), 'Access-Control-Allow-Origin': '*', 'Content-Type': 'application/json' }
+  }
+  return tokenObj
+}
