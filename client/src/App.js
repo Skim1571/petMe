@@ -24,13 +24,13 @@ function App() {
     localStorage.clear()
   };
 
-  const checkSession = async (token) => {
+  const checkSession = (token) => {
     let tokenObj = tokenAccessCreator(token)
-    let userSession = await checkToken(tokenObj);
-    if (userSession.code !== "") {
+    let userSession = checkToken(tokenObj);
+    if (userSession.status !== "200") {
       tokenObj = tokenRefreshCreator(token)
-      userSession = await refreshToken(tokenObj)
-      setAuthToken(userSession)
+      userSession = refreshToken(tokenObj)
+      setAuthToken(userSession.data)
       setIsLoggedIn(true)
     }
     setIsLoggedIn(true);
@@ -44,12 +44,20 @@ function App() {
         refresh: localStorage.getItem("token_refresh")
       });
       if (authToken) {
-        setIsLoggedIn(true)
         checkSession(authToken);
       }
     }
     checkTokenStatus()
   }, [isLoggedIn]);
+
+  useEffect(() => {
+    const checkRender = () => {
+      if (localStorage.getItem("token_access")) {
+        setIsLoggedIn(true)
+      }
+    }
+    checkRender()
+  }, [])
 
 
   return (

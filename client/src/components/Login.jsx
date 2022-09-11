@@ -23,7 +23,7 @@ export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
     event.preventDefault()
     let payload = await signInUser(loginInfo)
     setLoginInfo({ username: '', password: '' })
-    await setAuthToken({ payload })
+    await setAuthToken({ ...payload })
     await setIsLoggedIn(true)
     navigate('/')
   }
