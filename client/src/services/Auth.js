@@ -40,7 +40,7 @@ export const checkToken = async (data) => {
 export const refreshToken = async (data) => {
   try {
     // Checks if the current token if it exists is valid
-    const res = await Client.post(`/api/token/refresh/`, data)
+    const res = await axios.post(`/api/token/refresh/`, data)
     setToken(res.data)
     return res.data
   } catch (error) {

@@ -22,7 +22,6 @@ Client.interceptors.response.use(
   (error) => {
     console.log('intercept response')
     const originalRequest = error.config;
-    console.log('original', originalRequest)
     const valid = checkToken(localStorage.getItem('token_access'));
     // if refresh token is expired, redirect user to login with action
     if (valid.status === 401 && !originalRequest.retry) {

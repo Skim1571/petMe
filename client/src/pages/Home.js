@@ -5,14 +5,12 @@ import axios from "axios"
 import jwt from 'jwt-decode'
 import { PetCard } from "../components/PetCard"
 
-export const Home = ({ myPets, setMyPets, user, setUser, setAuthToken, isLoggedIn, setIsLoggedIn }) => {
+export const Home = ({ myPets, setMyPets, setUser, setAuthToken, isLoggedIn, setIsLoggedIn }) => {
 
 
   const loginPanel = (
     <Login setUser={setUser} isLoggedIn={isLoggedIn} setAuthToken={setAuthToken} setIsLoggedIn={setIsLoggedIn} />
   )
-
-
 
   useEffect(() => {
     const getMyPets = async () => {
@@ -33,8 +31,6 @@ export const Home = ({ myPets, setMyPets, user, setUser, setAuthToken, isLoggedI
         <PetCard Pets={myPets} />
       </div>
   )
-
-
 
   return (
     <div>

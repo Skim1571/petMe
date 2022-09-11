@@ -1,7 +1,7 @@
 import './sytles/App.css'
 import { Routes, Route } from 'react-router-dom'
 import { useState, useEffect } from 'react';
-import { checkToken, refreshToken, tokenAccessCreator, tokenRefreshCreator, getCookie } from './services/Auth'
+import { checkToken, refreshToken, tokenAccessCreator, tokenRefreshCreator, getCookie, setToken } from './services/Auth'
 import { NavBar } from './components/NavBar';
 import { Home } from './pages/Home'
 import { PetShop } from './pages/PetShop';
@@ -24,13 +24,14 @@ function App() {
     localStorage.clear()
   };
 
-  const checkSession = (token) => {
+  const checkSession = async (token) => {
     let tokenObj = tokenAccessCreator(token)
-    let userSession = checkToken(tokenObj);
-    if (userSession.status !== "200") {
+    let userSession = await checkToken(tokenObj);
+    if (userSession.request.status !== 200) {
       tokenObj = tokenRefreshCreator(token)
-      userSession = refreshToken(tokenObj)
-      setAuthToken(userSession.data)
+      let refreshSession = await refreshToken(tokenObj)
+      setToken(refreshSession)
+      setAuthToken(refreshSession)
       setIsLoggedIn(true)
     }
     setIsLoggedIn(true);
@@ -38,11 +39,7 @@ function App() {
   };
 
   useEffect(() => {
-    const checkTokenStatus = async () => {
-      setAuthToken({
-        access: localStorage.getItem("token_access"),
-        refresh: localStorage.getItem("token_refresh")
-      });
+    const checkTokenStatus = () => {
       if (authToken) {
         checkSession(authToken);
       }
@@ -66,7 +63,7 @@ function App() {
         <NavBar isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
       </header>
       <Routes>
-        <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} user={user} setUser={setUser} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} user={user} setUser={setUser} authToken={authToken} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/petshop' element={<PetShop authToken={authToken} user={user} isLoggedIn={isLoggedIn} />} />
         <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
         <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />
