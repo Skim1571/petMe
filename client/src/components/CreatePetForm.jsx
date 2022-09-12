@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import jwt from "jwt-decode"
 import { Client } from "../services/api"
 
 
-export const CreatePetForm = ({ authToken, user, speciesList }) => {
+export const CreatePetForm = ({ authToken, speciesList }) => {
   const [newPetDetails, setNewPetDetails] = useState({})
   let animalSelectionImage
 

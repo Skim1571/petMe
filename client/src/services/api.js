@@ -26,7 +26,7 @@ Client.interceptors.response.use(
     // if refresh token is expired, redirect user to login with action
     if (valid.status === 401 && !originalRequest.retry) {
       originalRequest.retry = true;
-      refreshToken(localStorage.getItem('token_refresh')
+      let res = refreshToken(localStorage.getItem('token_refresh')
       ).then((res) => {
         if (res.status === 200) {
           setToken(res.data);

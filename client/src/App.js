@@ -63,9 +63,9 @@ function App() {
         <NavBar isLoggedIn={isLoggedIn} handleLogOut={handleLogOut} />
       </header>
       <Routes>
-        <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} user={user} setUser={setUser} authToken={authToken} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
+        <Route path='/' element={<Home myPets={myPets} setMyPets={setMyPets} setUser={setUser} authToken={authToken} setAuthToken={setAuthToken} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />} />
         <Route path='/petshop' element={<PetShop authToken={authToken} user={user} isLoggedIn={isLoggedIn} />} />
-        <Route path='/pets/:pet_id' element={<PetDetails user={user} />} />
+        <Route path='/pets/:pet_id' element={<PetDetails />} />
         <Route path='/register' element={<Register isLoggedIn={isLoggedIn} />} />
       </Routes>
     </div>
