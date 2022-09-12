@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { PetControls } from "../components/PetControls"
 import { Client } from "../services/api"
 
@@ -8,6 +8,7 @@ export const PetDetails = ({ }) => {
   const [petDetailsRefresh, setPetDetailsRefresh] = useState(null)
 
   let { pet_id } = useParams()
+  let navigate = useNavigate()
 
   useEffect(() => {
     const getPetDetails = async () => {
@@ -27,6 +28,16 @@ export const PetDetails = ({ }) => {
     let days = ''
   }
 
+
+  const handleDeleteClick = async () => {
+    console.log('clicked delete')
+    let farmAnimal = prompt(`Are You Certain You Want to take ${petDetails.name} to the "farm"? \nY|N`)
+    if (farmAnimal === 'Y') {
+      let res = await Client.delete(`/pets/${pet_id}`)
+      navigate('/')
+    }
+  }
+
   let showDetails
   if (petDetails) {
     let backimg = {
@@ -34,8 +45,8 @@ export const PetDetails = ({ }) => {
     }
     showDetails =
       <div className="petDetails">
+        <button onClick={handleDeleteClick}>Delete Pet</button>
         <div className="petScreen" style={backimg}>
-          <h1>Hello</h1>
           <div className="petInfo">
             <h3>Species: {petDetails.species.name}</h3>
             <h1>Name: {petDetails.name}</h1>
@@ -43,7 +54,7 @@ export const PetDetails = ({ }) => {
           </div>
           <PetControls petDetailsRefresh={petDetailsRefresh} setPetDetailsRefresh={setPetDetailsRefresh} petDetails={petDetails} setPetDetails={setPetDetails} />
         </div>
-      </div>
+      </div >
 
   } else {
     <div className="gotLost" >
