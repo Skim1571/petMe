@@ -29,7 +29,6 @@ export const PetShop = ({ authToken, isLoggedIn }) => {
   return (
     <div className='petshop'>
       <div>
-        <h1>PetShop</h1>
       </div>
       {!speciesList ? '' : <CreatePetForm authToken={authToken} speciesList={speciesList} />}
     </div>

@@ -45,7 +45,7 @@ export const CreatePetForm = ({ authToken, speciesList }) => {
 
   return (
     <div className="createPet">
-      <h1>Create Pet Form</h1>
+      <h1 className="title">Choose Your Pet</h1>
       <div className='petimage'>
         <img src={animalSelectionImage} />
       </div>

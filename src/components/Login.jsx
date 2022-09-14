@@ -46,7 +46,6 @@ export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
 
   let login = (
     <div>
-      <h1>Login</h1>
       <form onSubmit={handleSubmitLogin}>
         <input type="text" value={loginInfo.username.value} name="username" placeholder="Username" onChange={handleChangeLogin} />
         <input type="text" value={loginInfo.password.value} name="password" placeholder="Password" onChange={handleChangeLogin} />
@@ -58,7 +57,6 @@ export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
 
   let register = (
     <div>
-      <h1>Register</h1>
       <form onSubmit={handleSubmitRegister}>
         <input type="text" value={registerInfo.username.value} name="username" placeholder="Username" onChange={handleChangeRegister} />
         <input type="text" value={registerInfo.password.value} name="password" placeholder="Password" onChange={handleChangeRegister} />

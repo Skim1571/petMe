@@ -4,7 +4,11 @@
 
 .App {
   background-color: #282c34;
+  background-image: url(https://wallup.net/wp-content/uploads/2016/01/288299-forest-landscape.jpg);
   background-attachment: fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100vw;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,9 +30,16 @@ nav {
   text-decoration: none;
 }
 
+.nav-links>a {
+  text-decoration: none;
+  margin: 1rem;
+}
+
 .active {
   background-color: #e97b00;
-  box-shadow: 0 8px 8px -4px rgb(113, 113, 113);
+  box-shadow: 0 8px 8px -4px rgb(235, 15, 15);
+  border-radius: 2rem;
+  padding: .5rem;
 }
 
 .pet-card {
@@ -117,6 +128,7 @@ nav {
 
 .loginForm {
   display: flex;
+  margin-top: 20rem;
   color: black;
   flex-direction: column;
   justify-content: center;
@@ -162,4 +174,12 @@ nav {
   border: 5px solid blue;
   width: 70rem;
   justify-content: center;
+}
+
+.title {
+  text-align: center;
+  background-color: rgb(27, 27, 27, .7);
+  color: azure;
+  border-radius: 2rem;
+  padding: 3px;
 }

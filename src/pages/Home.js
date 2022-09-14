@@ -34,7 +34,7 @@ export const Home = ({ myPets, setMyPets, setUser, setAuthToken, isLoggedIn, set
 
   return (
     <div>
-      <h1>Home</h1>
+      <h1 className="title">PetMe</h1>
       {!isLoggedIn ? loginPanel : userData}
     </div>
   )
