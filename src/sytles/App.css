@@ -44,8 +44,8 @@ nav {
 
 .pet-card {
   box-sizing: border-box;
-  max-width: 300px;
-  max-height: 380px;
+  min-width: 300px;
+  max-height: auto;
   border-radius: 4px;
   background-color: #1b1b1b;
   cursor: pointer;
@@ -68,11 +68,14 @@ nav {
 }
 
 .card .info-wrapper {
+  box-sizing: content-box;
+  width: auto;
   padding: 1em;
 }
 
 .card .image-wrapper {
   width: auto;
+  padding: 1em;
 }
 
 .card img {
