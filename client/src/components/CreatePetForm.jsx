@@ -1,12 +1,13 @@
 import { useState } from "react"
 import jwt from "jwt-decode"
 import { Client } from "../services/api"
+import { useNavigate } from "react-router-dom"
 
 
 export const CreatePetForm = ({ authToken, speciesList }) => {
   const [newPetDetails, setNewPetDetails] = useState({})
   let animalSelectionImage
-
+  let navigate = useNavigate()
 
   const handleChange = (event) => {
     setNewPetDetails({
@@ -26,6 +27,7 @@ export const CreatePetForm = ({ authToken, speciesList }) => {
       "image_url": speciesData[0].image_url
     }
     let res = await Client.post(`/pets/`, petData)
+    navigate('/')
   }
 
   switch (parseInt(newPetDetails.speciesChoice)) {

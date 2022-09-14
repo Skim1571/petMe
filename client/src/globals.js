@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:8000'
+const BASE_URL = Window.location
 
 module.exports = {
   BASE_URL

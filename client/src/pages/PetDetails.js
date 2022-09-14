@@ -19,14 +19,15 @@ export const PetDetails = ({ }) => {
   }, [petDetailsRefresh])
 
   // console.log('lastFT', petDetails.last_fed_time.slice(0, 19).split('T'))
-  let today = Date.now()
+  // let today = Date.now()
 
-  console.log('today', today.toLocaleString('en-US', { hour12: false }))
+  // console.log('today', today.toLocaleString('en-US', { hour12: false }))
 
-  const hungerMeter = () => {
-    let fedTime = petDetails.last_fed_time.slice(0, 19).split('T')
-    let days = ''
-  }
+  // const hungerMeter = () => {
+  //   let fedTime = petDetails.last_fed_time.slice(0, 19).split('T')
+  //   let days = ''
+  // }
+
 
 
   const handleDeleteClick = async () => {
@@ -47,11 +48,15 @@ export const PetDetails = ({ }) => {
       <div className="petDetails">
         <button onClick={handleDeleteClick}>Delete Pet</button>
         <div className="petScreen" style={backimg}>
+          <div className="petInteraction">
+          </div>
           <div className="petInfo">
             <h3>Species: {petDetails.species.name}</h3>
             <h1>Name: {petDetails.name}</h1>
             <h3>DOB: {petDetails.birth_date}</h3>
           </div>
+        </div>
+        <div className="petControls">
           <PetControls petDetailsRefresh={petDetailsRefresh} setPetDetailsRefresh={setPetDetailsRefresh} petDetails={petDetails} setPetDetails={setPetDetails} />
         </div>
       </div >

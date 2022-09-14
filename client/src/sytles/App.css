@@ -135,9 +135,11 @@ nav {
   width: 70rem;
   height: 50rem;
   background-repeat: no-repeat;
+  flex-direction: column;
 }
 
 .petInfo {
+  display: flex;
 
   justify-content: space-between;
 }
@@ -145,5 +147,19 @@ nav {
 .petButtons {
   border: 2px solid black;
   background-color: rgb(40, 44, 52, .8);
+}
 
+.petInteraction {
+  /* background-color: aqua; */
+  width: 70rem;
+  height: 80%;
+}
+
+.petControls {
+  display: flex;
+  color: black;
+  background-color: yellow;
+  border: 5px solid blue;
+  width: 70rem;
+  justify-content: center;
 }
