@@ -74,6 +74,8 @@
 
 ![Griffin](http://fantasystuff.weebly.com/uploads/1/3/3/7/13374715/9049633_orig.jpg)
 
+![BackgroundImage](https://wallup.net/wp-content/uploads/2016/01/288299-forest-landscape.jpg)
+
 #### [DRF-Writabel-nested](https://github.com/beda-software/drf-writable-nested): dependency to post with nested models
 
 #### [DjangoRestFramework-SimpleJWT](https://github.com/jazzband/djangorestframework-simplejwt): dependency to use JWT with Django
