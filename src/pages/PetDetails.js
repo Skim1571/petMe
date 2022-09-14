@@ -18,18 +18,6 @@ export const PetDetails = ({ }) => {
     getPetDetails()
   }, [petDetailsRefresh])
 
-  // console.log('lastFT', petDetails.last_fed_time.slice(0, 19).split('T'))
-  // let today = Date.now()
-
-  // console.log('today', today.toLocaleString('en-US', { hour12: false }))
-
-  // const hungerMeter = () => {
-  //   let fedTime = petDetails.last_fed_time.slice(0, 19).split('T')
-  //   let days = ''
-  // }
-
-
-
   const handleDeleteClick = async () => {
     console.log('clicked delete')
     let farmAnimal = prompt(`Are You Certain You Want to take ${petDetails.name} to the "farm"? \nY|N`)
