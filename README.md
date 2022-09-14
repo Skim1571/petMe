@@ -68,15 +68,15 @@
 
 ### **_Credits_**
 
-![Dragon Image](http://images4.fanpop.com/image/photos/21700000/Dragon-dragons-21750357-1024-768.jpg)
+![DragonImage](http://images4.fanpop.com/image/photos/21700000/Dragon-dragons-21750357-1024-768.jpg)
 
-![Unicorn Image](https://4.bp.blogspot.com/-LSt2KilH40M/Wn8H8WYqFRI/AAAAAAAPP9Y/Xz0lwn7kZlIDRzqRTU-lbfLr7L_fIcHVwCKgBGAs/s1600/unicorn1.jpg)
+![UnicornImage](https://4.bp.blogspot.com/-LSt2KilH40M/Wn8H8WYqFRI/AAAAAAAPP9Y/Xz0lwn7kZlIDRzqRTU-lbfLr7L_fIcHVwCKgBGAs/s1600/unicorn1.jpg)
 
 ![Griffin](http://fantasystuff.weebly.com/uploads/1/3/3/7/13374715/9049633_orig.jpg)
 
-#### ![DRF-Writabel-nested](https://github.com/beda-software/drf-writable-nested): dependency to post with nested models
+#### [DRF-Writabel-nested](https://github.com/beda-software/drf-writable-nested): dependency to post with nested models
 
-#### ![DjangoRestFramework-SimpleJWT](https://github.com/jazzband/djangorestframework-simplejwt): dependency to use JWT with Django
+#### [DjangoRestFramework-SimpleJWT](https://github.com/jazzband/djangorestframework-simplejwt): dependency to use JWT with Django
 
 ---
 © 2022 GitHub, Inc.
