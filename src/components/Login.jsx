@@ -48,7 +48,7 @@ export const Login = ({ setUser, setAuthToken, setIsLoggedIn }) => {
     <div>
       <form onSubmit={handleSubmitLogin}>
         <input type="text" value={loginInfo.username.value} name="username" placeholder="Username" onChange={handleChangeLogin} />
-        <input type="text" value={loginInfo.password.value} name="password" placeholder="Password" onChange={handleChangeLogin} />
+        <input type="password" value={loginInfo.password.value} name="password" placeholder="Password" onChange={handleChangeLogin} />
         <button>Submit</button>
       </form>
     </div>
